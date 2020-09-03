@@ -1,6 +1,6 @@
-python3 -m venv .
+python3 -m venv auth
 source auth/bin/activate
-pip3 install -r requirements.txt 
+pip install flask flask-sqlalchemy flask-login
 export FLASK_APP=project
 export FLASK_ENV=development
 export FLASK_DEBUG=1
