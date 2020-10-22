@@ -10,5 +10,5 @@ class User(UserMixin, db.Model):
 class Response(db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     email = db.Column(db.String(100))
-    title = db.Column(db.String(100))
+    subject = db.Column(db.String(100))
     message = db.Column(db.String(1000))

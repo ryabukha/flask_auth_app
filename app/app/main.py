@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from . import db
 from .models import Response
 from flask_login import login_required, current_user
@@ -19,11 +19,28 @@ def profile():
 #     print('response func, ' + current_user.name)
 #     return render_template('response_form.html')
 
-@main.route('/response_form')
-@login_required
-def response_form():
-    new_message = Response(email='b@b.b', title='bname', message='hello')
+def write_message_to_database(data):
+    email = data["email"]
+    subject = data["subject"]
+    message = data["message"]
+    new_message = Response(email=email, subject=subject, message=message)
     db.session.add(new_message)
     db.session.commit()
-    print('response func, ' + current_user.name)
-    return render_template('response_form.html')
+    
+@main.route('/submit_form', methods=['POST', 'GET'])
+def submit_form():
+    if request.method == 'POST':
+        try:
+            data = request.form.to_dict()
+            if data['email'] == '' and data['message'] == '' and data['subject'] == '':
+                return 'all field is empty' # redirect('/thankyou.html')
+            write_message_to_database(data)
+            return render_template('thankyou.html')
+        except:
+            return 'did not save to database'
+    else:
+        return 'someting went wrong. Try again!!'
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')

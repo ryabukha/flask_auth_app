@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-8">
+    <form action="submit_form" method="post">
+      <p>
+      <input name="email" class="input" type="email" id="email" placeholder="Email">
+    </p>
+      <input name="subject" class="input" type="text" id="subject" placeholder="Subject">
+
+      <textarea name="message" class="textarea" rows="5" placeholder="Enter your message"></textarea>
+
+      <button type="submit" class="button is-block is-info is-large is-fullwidth">Send</button>
+    </form>
+  </div>
+
+  <div class="tile is-4">
+  <ul>
+  <li>
+  + 380 99 289 04 20
+  </li>
+  <li>
+  s.ryabukha@gmail.com
+  </li>
+  <li>
+  Kyiv, Ukraine
+  </li>
+  </ul>
+  <h3>Follow me on social networks</h3>
+  <a href="http://www.facebook.com" title="facebook">facebook
+  </a>
+  <a href="http://www.twitter.com" title="twitter">twitter
+  </a>
+  <a href="http://www.linkedin.com" title="linkedin">linkedin
+  </a>
+  </div>
+</div>
+{% endblock %}
