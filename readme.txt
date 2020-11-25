@@ -1,8 +1,8 @@
 apt-get install python3-venv nginx
 python3 -m venv auth
 source auth/bin/activate
-cd ./app
 pip install -r requirements.txt
+cd ./app
 
 # systemd service
 cp ./unit/app_flask.service /etc/systemd/system/app_flask.service
