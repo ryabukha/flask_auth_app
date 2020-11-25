@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/app
-Environment="PATH=/app/auth/bin"
-ExecStart=/app/auth/bin/uwsgi --ini uwsgi.ini
+WorkingDirectory=/www/home_site/app
+Environment="PATH=/www/home_site/app/auth/bin"
+ExecStart=/www/home_site/app/auth/bin/uwsgi --ini uwsgi.ini
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
