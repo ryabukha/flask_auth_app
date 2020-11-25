@@ -14,10 +14,10 @@ def index():
 def profile():
     return render_template('profile.html', name=current_user.name)
 
-# @main.route('/response_form')
-# def response_form():
-#     print('response func, ' + current_user.name)
-#     return render_template('response_form.html')
+@main.route('/response_form')
+def response_form():
+    print('response func, ' + current_user.name)
+    return render_template('response_form.html')
 
 def write_message_to_database(data):
     email = data["email"]
