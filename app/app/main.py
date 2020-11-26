@@ -8,6 +8,7 @@ main = Blueprint('main', __name__)
 
 # Declare your table
 class ItemTable(Table):
+    classes = ['table']
     id = Col('id')
     email = Col('email')
     subject = Col('subject')
