@@ -2,27 +2,38 @@
 
 {% block content %}
 
-
-
-
-
-
-<div class="tile is-ancestor">
-  <div class="tile is-8">
+<!-- 
+<div class="level">
+  <div class="level-left">
     <form action="submit_form" method="post">
       <p>
-      <input name="email" class="input" type="email" id="email" placeholder="Email">
+        <div class="field">
+          <div class="control">
+            <input name="email" class="input" type="email" id="email" placeholder="Email">
+          </div>
+        </div>
     </p>
-      <input name="subject" class="input" type="text" id="subject" placeholder="Subject">
-
-      <textarea name="message" class="textarea" rows="5" placeholder="Enter your message"></textarea>
-
-      <button type="submit" class="button is-block is-info is-large is-fullwidth">Send</button>
+      <div class="field">
+        <div class="control">
+          <input name="subject" class="input" type="text" id="subject" placeholder="Subject">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <textarea name="message" class="textarea" rows="5" placeholder="Enter your message"></textarea>
+        </div>
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-primary">Send</button>
+      </div>
     </form>
   </div>
 
   <div class="tile is-4">
-  <ul>
+    text
+  </div> -->
+
+  <!-- <ul>
   <li>
   + 380 99 289 04 20
   </li>
@@ -40,6 +51,62 @@
   </a>
   <a href="http://www.linkedin.com" title="linkedin">linkedin
   </a>
+  </div> -->
+
+<!-- </div> -->
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-6 is-vertical is-parent">
+    <div class="tile is-child box">
+      <form action="submit_form" method="post">
+        <p>
+          <div class="field">
+            <div class="control">
+              <input name="email" class="input" type="email" id="email" placeholder="Email">
+            </div>
+          </div>
+      </p>
+        <div class="field">
+          <div class="control">
+            <input name="subject" class="input" type="text" id="subject" placeholder="Subject">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <textarea name="message" class="textarea" rows="5" placeholder="Enter your message"></textarea>
+          </div>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">Send</button>
+        </div>
+      </form>    </div>
+    <!-- <div class="tile is-child box">
+      <p class="title">Two</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+    </div> -->
+  </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <ul>
+        <li>
+        + 380 99 289 04 20
+        </li>
+        <li>
+        s.ryabukha@gmail.com
+        </li>
+        <li>
+        Kyiv, Ukraine
+        </li>
+        </ul>
+        <h3>Follow me on social networks</h3>
+        <a href="http://www.facebook.com" title="facebook">facebook
+        </a>
+        <a href="http://www.twitter.com" title="twitter">twitter
+        </a>
+        <a href="http://www.linkedin.com" title="linkedin">linkedin
+        </a>    </div>
   </div>
 </div>
+
 {% endblock %}
