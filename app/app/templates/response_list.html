@@ -5,8 +5,18 @@
   Response List
 </h1>
 <h2 class="subtitle">
-  <div class="table-container">
-  {{ table }}
-  </div>
+
+  {% for item in items %}
+  <article class="message">
+    <div class="message-header">
+      <p>id: {{item.id}}. email: {{item.email}}. sub: {{item.subject}}</p>
+    </div>    
+    <div class="message-body">
+<div style="white-space: pre-wrap;">{{item.message}}</div>
+    </div>
+  
+  </article>
+  {% endfor %}
+
 </h2>
 {% endblock %}

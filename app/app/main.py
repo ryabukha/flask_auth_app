@@ -1,25 +1,10 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from . import db
 from .models import Response
 from flask_login import login_required, current_user
 from flask_table import Table, Col
 
 main = Blueprint('main', __name__)
-
-# Declare your table
-class ItemTable(Table):
-    classes = ['table']
-    id = Col('id')
-    email = Col('email')
-    subject = Col('subject')
-    message = Col('message')
-# Get some objects
-class Item(object):
-    def __init__(self, id, email, subject, message):
-        self.id = id
-        self.email = email
-        self.subject = subject
-        self.message = message
 
 def write_message_to_database(data):
     email = data["email"]
@@ -31,7 +16,9 @@ def write_message_to_database(data):
 
 def read_message_from_database():
     items = Response.query.all()
-    return ItemTable(items)
+    # for item in items:
+    #     print(item.message)
+    return items
 
 @main.route('/')
 def index():
@@ -44,9 +31,12 @@ def profile():
 
 @main.route('/response_list')
 def response_list():
-    print('response func, ' + current_user.name)
-    table = read_message_from_database()
-    return render_template('response_list.html', table=table)
+    if current_user.is_authenticated and current_user.name == 'a':
+        items = read_message_from_database()
+        return render_template('response_list.html', items = items)
+    else:
+        flash('Please check your login details and try again.')
+        return redirect(url_for('auth.login'))
 
 @main.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
