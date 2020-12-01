@@ -20,6 +20,11 @@ def read_message_from_database():
     #     print(item.message)
     return items
 
+def drop_message_from_database(item):
+    id = item['id']
+    Response.query.filter_by(Response.id == id).delete()
+    db.session.commit()
+
 @main.route('/')
 def index():
     return render_template('index.html')
@@ -30,6 +35,7 @@ def profile():
     return render_template('profile.html', name=current_user.name)
 
 @main.route('/response_list')
+@login_required
 def response_list():
     if current_user.is_authenticated and current_user.name == 'a':
         items = read_message_from_database()
