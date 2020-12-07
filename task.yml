@@ -1,0 +1,10 @@
+---
+- name: task to deploy
+  gather_facts: false
+  hosts: all
+  tasks:
+
+  - name: pinpong
+    ping:
+
+  - name: 
