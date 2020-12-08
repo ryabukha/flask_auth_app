@@ -10,6 +10,7 @@
   <article class="message">
     <div class="message-header">
       <p>id: {{item.id}}. email: {{item.email}}. sub: {{item.subject}}</p>
+      <button class="delete" aria-label="delete" value="{{item.id}}"></button>
     </div>    
     <div class="message-body">
 <div style="white-space: pre-wrap;">{{item.message}}</div>
