@@ -3,6 +3,11 @@
   gather_facts: false
   hosts: all
   become: yes
+  vars:
+    base_path: "/www/site"
+    work_dir_path: "{{ base_path }}/app"
+    env_path: "{{ base_path }}/venv"
+    env_path_bin: "{{ env_path }}/bin"
   tasks:
 
   - name: pinpong
@@ -28,10 +33,40 @@
   - name: clone app
     git:
       repo: https://github.com/ryabukha/site.git
-      dest: /www/site
+      dest: "{{ base_path }}"
 
   - name: pip install flask
     pip:
-      requirements: /www/site/requirements.txt
-      virtualenv: /www/site/auth
-      virtualenv_command: 'python3 -m venv /www/site/auth'
+      requirements: "{{ base_path }}/requirements.txt"
+      virtualenv: "{{ env_path }}"
+      virtualenv_command: 'python3 -m venv {{ env_path }}'
+
+  - name: create systemctl unit
+    template:
+      src: app_site.service.j2
+      dest: /etc/systemd/system/app_site.service
+
+
+  - name: create nginx config
+    template:
+      src: default.j2
+      dest: /etc/nginx/sites-available/default
+
+  - name: just force systemd to re-execute itself (2.8 and above)
+    systemd:
+      daemon_reload: yes
+
+  - name: nginx is started
+    systemd:
+      name: nginx
+      state: reloaded
+      enabled: yes
+      masked: no
+
+  - name: flask is started
+    systemd:
+      name: app_site
+      state: started
+      enabled: yes
+      masked: no
+

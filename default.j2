@@ -1,0 +1,18 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root {{ work_dir_path }};
+
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / { try_files $uri @app; }
+    location @app {
+    include uwsgi_params;
+    uwsgi_pass 127.0.0.1:3031;
+    }
+}
+

@@ -1,0 +1,18 @@
+[Unit]
+Description=uWSGI instance to serve app_site
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory={{ work_dir_path }}
+Environment="PATH={{ env_path_bin }}"
+ExecStart={{ env_path_bin }}/uwsgi --ini uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
