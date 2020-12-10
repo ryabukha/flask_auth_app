@@ -53,8 +53,8 @@ def submit_form():
                 return 'all field is empty' # redirect('/thankyou.html')
             write_message_to_database(data)
             return render_template('thankyou.html')
-        except:
-            return 'did not save to database'
+        except Exception as e:
+            return e
     else:
         return 'someting went wrong. Try again!!'
 

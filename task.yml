@@ -30,10 +30,12 @@
       - git
       - tree
       
-  - name: clone app
+  - name: git clone app
     git:
       repo: https://github.com/ryabukha/site.git
       dest: "{{ base_path }}"
+      force: yes
+    register: git_clone_app
 
   - name: pip install flask
     pip:
@@ -41,25 +43,51 @@
       virtualenv: "{{ env_path }}"
       virtualenv_command: 'python3 -m venv {{ env_path }}'
 
+  - name: chown site work_dir_path
+    file:
+      path: "{{ work_dir_path }}"
+      owner: www-data
+      group: www-data
+      mode: '0755'
+
+
   - name: create systemctl unit
     template:
       src: app_site.service.j2
       dest: /etc/systemd/system/app_site.service
-
+    register: app_site_unit
 
   - name: create nginx config
     template:
       src: default.j2
       dest: /etc/nginx/sites-available/default
+    register: nginx_config
 
   - name: just force systemd to re-execute itself (2.8 and above)
     systemd:
       daemon_reload: yes
+    when: app_site_unit.changed
+
+  - name: nginx is reloaded
+    systemd:
+      name: nginx
+      state: reloaded
+      enabled: yes
+      masked: no
+    when: nginx_config.changed
+
+  - name: app_site is restarted
+    systemd:
+      name: app_site
+      state: restarted
+      enabled: yes
+      masked: no
+    when: app_site_unit.changed or git_clone_app.changed
 
   - name: nginx is started
     systemd:
       name: nginx
-      state: reloaded
+      state: started
       enabled: yes
       masked: no
 
