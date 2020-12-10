@@ -46,7 +46,7 @@
   - name: python manage.py db upgrade
     command: 
       cmd: "{{ env_path_bin }}/python manage.py db migrate"
-    argv:
+    args:
       chdir: "{{ work_dir_path }}"
 
   - name: chown site work_dir_path

@@ -3,3 +3,4 @@ flask-sqlalchemy
 flask-login
 flask_table
 uwsgi
+flask_script
