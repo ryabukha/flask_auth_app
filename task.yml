@@ -44,6 +44,7 @@
       virtualenv_command: 'python3 -m venv {{ env_path }}'
 
   - name: python manage.py db upgrade
+    tags: run_migrate
     command: 
       cmd: "{{ env_path_bin }}/python manage.py db migrate"
     args:
