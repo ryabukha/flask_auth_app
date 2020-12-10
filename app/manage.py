@@ -31,6 +31,7 @@ class Response(db.Model):
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     name = db.Column(db.String(100))
+    description = db.Column(db.String(100))
 
 if __name__ == '__main__':
     manager.run()

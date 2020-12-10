@@ -64,7 +64,7 @@
       path: "{{ work_dir_path }}"
       owner: www-data
       group: www-data
-      mode: '0750'
+      # mode: '0750'
       recurse: yes
 
   - name: create systemctl unit
