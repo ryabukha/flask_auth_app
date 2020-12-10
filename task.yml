@@ -43,13 +43,19 @@
       virtualenv: "{{ env_path }}"
       virtualenv_command: 'python3 -m venv {{ env_path }}'
 
+  - name: python manage.py db upgrade
+    command: 
+      cmd: "{{ env_path_bin }}/python manage.py db migrate"
+    argv:
+      chdir: "{{ work_dir_path }}"
+
   - name: chown site work_dir_path
     file:
       path: "{{ work_dir_path }}"
       owner: www-data
       group: www-data
       mode: '0755'
-
+      recurse: yes
 
   - name: create systemctl unit
     template:
